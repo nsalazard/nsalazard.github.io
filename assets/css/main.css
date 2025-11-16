@@ -46,6 +46,16 @@ blockquote, q {
 		content: none;
 	}
 
+/* Ensure top section background image applies on all screen sizes
+   (placed at end so it overrides media-query-specific rules) */
+article#top.wrapper.style1 {
+	background-image: linear-gradient(135deg, rgba(67,179,224,0.25), rgba(255,255,255,0.0)), url("../../images/gem.png");
+	background-color: #687e8f;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -100,7 +110,7 @@ input, select, textarea {
 	body, input, textarea, select {
 		font-family: 'Open Sans', sans-serif;
 		line-height: 1.85em;
-		color: #1c5da7;
+		color: #172431;
 		font-weight: 300;
 		font-size: 13pt;
 	}
@@ -1658,6 +1668,29 @@ input, select, textarea {
 				width: auto;
 			}
 
+/* Circular avatar support */
+.image.circle {
+	display: block;
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.image.circle img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+@media screen and (max-width: 736px) {
+	.image.circle {
+		width: 120px;
+		height: 120px;
+	}
+}
+
 /* Button */
 
 	input[type="button"],
@@ -2418,6 +2451,17 @@ input, select, textarea {
 				#top p {
 					font-size: 1em;
 				}
+
+	/* Top section specific background (image + subtle gradient overlay)
+	   Uses an image from the repo's `images/` folder. Change the filename
+	   below if you want a different background. */
+	article#top.wrapper.style1 {
+		background-image: linear-gradient(135deg, rgba(67,179,224,0.25), rgba(255,255,255,0.0)), url("../../images/fall.jpg");
+		background-color: #92b9eb;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+	}
 
 			#contact footer {
 				margin: 0;
