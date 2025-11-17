@@ -46,6 +46,25 @@ blockquote, q {
 		content: none;
 	}
 
+/* Strong override to ensure the intro box is visible above the background image */
+/* 
+article#top .top-text {
+	background-image: linear-gradient(135deg, rgba(67,179,224,0.25), rgba(255,255,255,0.0)), url("../../images/gem_01.png");
+	background-color: #708195 !important;
+	padding: 1.5em !important;
+	border-radius: 8px !important;
+	max-width: 56em !important;
+	box-shadow: 0 6px 24px rgba(0,0,0,0.18) !important;
+	color: #22303a !important;
+	position: relative !important;
+	z-index: 9999 !important;
+	background-size: 100% 100%; /* Forces the image to stretch to cover the entire width and height */
+    /* background-repeat: no-repeat;
+}
+
+*/
+
+
 /* Ensure top section background image applies on all screen sizes
    (placed at end so it overrides media-query-specific rules) */
 article#top.wrapper.style1 {
@@ -108,12 +127,25 @@ input, select, textarea {
 		}
 
 	body, input, textarea, select {
-		font-family: 'Open Sans', sans-serif;
-		line-height: 1.85em;
-		color: #172431;
-		font-weight: 300;
-		font-size: 13pt;
-	}
+    font-family: 'Montserrat', 'Open Sans', sans-serif; 
+    line-height: 1.6em; 
+    color: #1A202C; 
+    /* 1. INCREASED BOLDNESS for clarity */
+    font-weight: 600; 
+    font-size: 11.5pt; 
+    letter-spacing: 0.02em; 
+    
+    /* 2. ADDED TEXT SHADOW for separation from busy background */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+	/* 🚀 To make it 'Bolder' and more dominant: */
+	h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif; /* Elegant, bold serif for headings */
+    font-weight: 700; /* Extra bold for impact */
+    line-height: 1.2em;
+    color: #000000; /* Pure black for maximum punch */
+}
 
 	a {
 		-moz-transition: color .2s ease-in-out;
@@ -1691,6 +1723,88 @@ input, select, textarea {
 	}
 }
 
+/* Portfolio: single-item rows with image left and text right
+   Make the .row a flex container and force the left image column to
+   stretch to match the height of the box (white background). */
+.portfolio-item {
+	/* Keep the white box padding, but make the item a flex container
+	   so its inner .row can grow to fill the box height. */
+	display: flex;
+	align-items: stretch;
+	padding: 1em 1.25em;
+}
+
+.portfolio-item .row {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: stretch;
+	width: 100%;
+}
+
+.portfolio-item h3 {
+	margin-top: 0;
+}
+
+/* Make columns flexible and let the image column fill available height */
+.portfolio-item .col-4,
+.portfolio-item .col-8 {
+	display: flex;
+	flex-direction: column;
+}
+
+.portfolio-item .col-8 {
+	justify-content: center;
+}
+
+.portfolio-item .image.featured {
+	/* Allow the image container to grow and match the sibling column height */
+	display: block;
+	flex: 1 1 auto;
+	width: 100%;
+	height: 100%;
+	min-height: 200px;
+	overflow: hidden;
+}
+
+.portfolio-item .image.featured img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Reset any .box.style2 image offsets for portfolio items so the
+   image column sits inline and can stretch to the box height. */
+.portfolio-item .image {
+	position: static !important;
+	left: auto !important;
+	top: auto !important;
+	margin: 0 !important;
+	width: auto !important;
+}
+
+/* Make the portfolio section container wider (more space at the sides) */
+.wrapper.style3 .container {
+	max-width: 1400px;
+	width: calc(100% - 60px);
+}
+
+@media screen and (max-width: 980px) {
+	.portfolio-item .col-4 {
+		max-width: 100%;
+		width: 100%;
+	}
+	.portfolio-item .col-8 {
+		max-width: 100%;
+		width: 100%;
+		margin-top: 1em;
+	}
+	.portfolio-item .row {
+		flex-direction: column;
+		text-align: center;
+	}
+}
+
 /* Button */
 
 	input[type="button"],
@@ -2451,6 +2565,43 @@ input, select, textarea {
 				#top p {
 					font-size: 1em;
 				}
+
+		/* Neutral container for the intro text to improve contrast over the background */
+		.top-text {
+			display: block;
+			position: relative;
+			z-index: 2;
+			background-color: rgba(255,255,255,0.96);
+			padding: 1.25em 1.5em;
+			border-radius: 8px;
+			max-width: 52em;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+			color: #2b3b45;
+			/* Default alignment: justified for better reading on wide screens */
+			text-align: justify;
+			text-justify: inter-word;
+		}
+
+		/* Align the neutral box within the two-column layout: keep it left-aligned on wide screens
+		   and centered on smaller screens */
+		@media screen and (min-width: 981px) {
+			.top-text {
+				margin-left: 0; /* sits within the right column already */
+			}
+		}
+
+		@media screen and (max-width: 980px) {
+			.top-text {
+				margin: 0 auto 1.25em auto;
+				text-align: center; /* keep centered on small screens */
+			}
+		}
+
+	/* Helper to center text even on wide screens: add `center` to the container */
+	.top-text.center,
+	article#top .top-text.center {
+	    text-align: center !important;
+	}
 
 	/* Top section specific background (image + subtle gradient overlay)
 	   Uses an image from the repo's `images/` folder. Change the filename
