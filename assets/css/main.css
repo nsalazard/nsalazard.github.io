@@ -71,8 +71,9 @@ article#top.wrapper.style1 {
 	background-image: linear-gradient(135deg, rgba(67,179,224,0.25), rgba(255,255,255,0.0)), url("../../images/gem.png");
 	background-color: #687e8f;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 	background-position: center;
+	min-height: 600px;
 }
 
 table {
